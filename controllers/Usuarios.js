@@ -1,5 +1,6 @@
 const { response, request } = require("express");
 const User = require("../models/usuario");
+const bcryptjs = require("bcryptjs");
 
 const usuariosGet = async (req, res = response) => {
   const users = await User.find();
@@ -14,13 +15,16 @@ const usuariosGetId = async (req = request, res = response) => {
 };
 
 const usuariosPost = async (req = request, res = response) => {
-  const body = req.body;
+  const { nombre, correo, password, rol } = req.body;
 
-  const user = new User(body);
+  const user = new User({ nombre, correo, password, rol });
+
+  const salt = await bcryptjs.genSalt();
+  user.password = bcryptjs.hashSync(password, salt);
 
   await user.save();
 
-  res.json({ body });
+  res.json(user);
 };
 
 const usuariosPut = (req, res = response) =>
@@ -29,8 +33,12 @@ const usuariosPut = (req, res = response) =>
 const usuariosPatch = (req, res = response) =>
   res.json({ msg: "Patch api - controlador" });
 
-const usuariosDelete = (req, res = response) =>
-  res.json({ msg: "Delete api - controlador" });
+const usuariosDelete = async (req, res = response) => {
+  await User.deleteMany();
+  const users = await User.find();
+
+  res.json(users);
+};
 
 module.exports = {
   usuariosGet,
