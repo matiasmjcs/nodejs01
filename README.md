@@ -18,12 +18,13 @@ To set up the project on your local environment, follow the steps below:
 ## Project Structure
 
 ## The project follows a basic structure of a Node.js and Express-based web application:
-index.js: Main application file where middlewares are configured and routes are defined.  
-routes/: Directory containing application route files.  
-controllers/: Directory containing route controllers.  
-models/: Directory containing data models for the application.  
-views/: Directory containing application views (if using a template engine).  
-public/: Directory for static files such as CSS, images, and JavaScript.  
+- `index.js`: Main application file where middlewares are configured and routes are defined.  
+- `routes/`: Directory containing application route files.  
+- `controllers/`: Directory containing route controllers.  
+- `models/`: Directory containing data models for the application.  
+- `views/`: Directory containing application views (if using a template engine).  
+- `public/`: Directory for static files such as CSS, images, and JavaScript.  
+  
 
 ## Contribution
 Feel free to contribute to this repository by opening issues or sending pull requests. You can also suggest new features or improvements.
